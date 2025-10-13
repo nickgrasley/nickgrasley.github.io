@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+
+    <title>Nick Grasley</title>
+
+    <!-- Google Analytics tracking code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TR57QF037"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4TR57QF037');
+    </script>
+
+    <!-- Add JavaScript for popup functionality -->
+    <script>
+      function myFunction(id) {
+        var x = document.getElementById(id);
+      
+        var ids = [
+          "abs_jmp", "surveys_jmp", 
+          "abs_sports", "abs_overlap",
+          "teaching_bpe", "teaching_Rguide"];
+      
+        for(var i = 0; i < ids.length; i++) {
+          var item = ids[i];
+          if (item != id) {
+            document.getElementById(item).style.display = "none";
+          } else {
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+          }
+        }        
+      }
+    </script>
+    <style>
+      #contact {
+          margin-bottom: 2rem;
+      }
+
+      #contact img {
+          max-width: 370px;
+          height: auto;
+          width: 100%;
+      }
+
+      hr {
+          margin: 2rem 0;
+          border: none;
+          border-top: 1px solid #ccc;
+          clear: both;
+      }
+
+      @media (max-width: 768px) {
+          #contact img {
+              max-width: 100%;
+          }
+      }
+  </style>
+</head>
+
+<body>
+<div id="container">
+  <div id="center">
+    <div id="contact">
+      <div style="float: left; margin-right: 20px; max-width: 370px;">
+        <img src="avatar.jpeg" alt="Photo of Nick Grasley" style="display: block; width: 100%;" />
+        <!-- CHANGE 2: Replaced <p> with <div> and set margin-top to control spacing -->
+        <div style="font-size: 0.6rem; font-style: italic; text-align: right; margin-top: -14px;">
+            Photo by Vanessa Coleman
+        </div>
+      </div>
+
+      <!--img src="avatar.jpeg" alt="Photo of Nick Grasley" /--> 
+      <!-- ADDED PHOTO CREDIT HERE -->
+      <!--p style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">Photo by Vanessa Coleman</p-->
+ 
+      <h1>Nick Grasley</h1>
+
+      <div class="text">
+        <p>I am a PhD candidate in Economics at Stanford University. My primary research field is public economics. My research focuses on how government policy design protects households against financial risk.</p>
+
+        <p>I will be on the academic job market this year (2025-2026).</p>
+
+        <p><a href="https://nickgrasley.github.io/assets/mdg/cv.pdf" class="button">CV</a> <a href="mailto:ngrasley@stanford.edu" class="button">Email: ngrasley@stanford.edu</a></p>
+
+        <!-- ADDED COMMITTEE MEMBERS HERE -->
+        <div style="margin-top: 1.5rem;">
+            <p><strong>Committee:</strong></p>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li><a href="https://nmahoney.people.stanford.edu">Neale Mahoney</a> (Primary): <a href="mailto:nmahoney@stanford.edu">nmahoney@stanford.edu</a></li>
+                <li><a href="https://sites.google.com/view/pistaferri/home">Luigi Pistaferri</a>: <a href="mailto:pista@stanford.edu">pista@stanford.edu</a></li>
+                <li><a href="https://economics.stanford.edu/people/caroline-hoxby">Caroline Hoxby</a>: <a href="mailto:choxby@stanford.edu">choxby@stanford.edu</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <hr> 
+
+        <h2>Working papers</h2>
+        <div class="text">
+
+
+          <p><!--a href="https://nickgrasley.github.io/assets/papers/jmp/jmp.pdf"--><b>The Insurance Value of Federal Rental Assistance</b></a> <br><i>Job market paper</i> 
+          
+          <div class="buttonbar">
+            <button class="button" onclick="myFunction(&quot;abs_jmp&quot;)">Abstract</button>
+          </div>
+            
+          <div class="popup" id="abs_jmp" style="display:none;">
+            <!--Abstract The US spends $48 billion on federal rental assistance programs that transfer large in-kind housing subsidies to few low income households. However, we know little about whether this form of targeting is efficient. In this paper, I reconceptualize federal rental assistance as insurance against joint rent-income risk and quantify its net insurance value. I show that rent prices exacerbate consumption risk beyond income risk alone, and that rental assistance provides targeted insurance by smoothing the share of income households pay as rent. Using Panel Survey of Income Dynamics (PSID) combined with rich HUD administrative data from 2003-2022, I estimate the insurance value use the sufficient statistics approach. The sufficient statistics framework reveals that marginal expansion of rental assistance generates $1.51 in benefits per dollar of government spending, compared to the literature's estimate of $0.66. This insurance value primarily derives from insuring income in high-rent locations rather than insuring rent volatility directly, although fixed income households benefit more from rent insurance. Using a structural lifecycle model, I provide new estimates of household preferences for rental assistance and examine the mechanisms behind its insurance value. Counterfactual analysis demonstrates that the program's income-based subsidy design and rationing through waitlists are crucial features that enhance its insurance value relative to alternative designs..-->
+          </div>
+      
+
+          <p><a href="https://nickgrasley.github.io/assets/papers/sportsgambling/sportsbetting.pdf"><b>Do Sports Bettors Need Consumer Protection? Evidence from a Field Experiment</b></a> (with <a href="https://mattbrownecon.github.io/">Matthew Brown</a> and <a href="[Link to Mari's Page]">Mariana Guido</a>)
+            <br> 
+            Media coverage: <a href="https://marginalrevolution.com/marginalrevolution/2024/11/are-sports-bettors-overly-optimistic.html?utm_source=rss&utm_medium=rss&utm_campaign=are-sports-bettors-overly-optimistic">Marginal Revolution</a>, <a href="https://www.wsj.com/finance/investing/sports-betting-study-5d9a0044">Wall Street Journal</a> 
+
+          <div class="buttonbar">
+            <button class="button" onclick="myFunction(&quot;abs_sports&quot;)">Abstract</button>
+            <a href="https://marianaguido.github.io/assets/papers/sportsgambling/slides.pdf" class="button" download>Slides</a>
+            <button class="button" onclick="myFunction(&quot;surveys_jmp&quot;)">Survey Instruments</button>            
+            <a href="https://www.dropbox.com/scl/fo/r7eztifg07e4d8jo377v6/ANjBX6LcSHyql8BKkYXhMDw?rlkey=81gibx12clkvs6jpske8v14cr&st=mxk1bvaj&dl=0" class="button">Data</a>
+          </div>
+
+          <div class="popup" id="abs_sports" style="display:none;">
+            Corrective policy in sports betting markets is motivated by concerns that demand is driven by behavioral bias rather than a normative preference to gamble. We conduct a field experiment with frequent sports bettors to measure the impact of two biases, overoptimism about financial returns and self-control problems, on the demand for sports betting. We find widespread over-optimism about financial returns. The average participant predicts that they will break even, but in fact loses about 8 cents for every dollar wagered. Self-control problems are smaller and less common. We estimate a model of biased betting and use it to evaluate several corrective policies. Our estimates imply that the surplus-maximizing corrective excise tax on sports betting is twice as large as prevailing tax rates. We estimate substantial heterogeneity in bias across bettors, which implies that targeted interventions that directly eliminate bias could improve on a tax. However, implementation is challenging: we show that two bias-correction interventions favored by the gambling industry do not deliver the targeting improvements.
+          </div>
+<!-- https://www.dropbox.com/scl/fo/r7eztifg07e4d8jo377v6/ANjBX6LcSHyql8BKkYXhMDw?rlkey=81gibx12clkvs6jpske8v14cr&st=mxk1bvaj&dl=0 -->
+
+          <div class="popup" id="surveys_jmp" style="display:none;">
+            <p>PDF survey instruments available for download. Qualtrics files are available on request.
+              <ul>
+                <li><a href="https://marianaguido.github.io/assets/papers/sportsgambling/Survey1.pdf">Survey 1</a></li>
+                <li><a href="https://marianaguido.github.io/assets/papers/sportsgambling/Survey2.pdf">Survey 2</a></li>
+                <li><a href="https://marianaguido.github.io/assets/papers/sportsgambling/Survey3.pdf">Survey 3</a></li>
+              </ul>
+          </div>
+
+          <p><!--a href="https://nickgrasley.github.io/assets/papers/VI/VI.pdf"--><b>Aligning Incentives or Gaming the System? The Impact of Insurer-Physician Acquisitions</b></a> (with <a href="[Link to Mari's Page]">Mariana Guido</a>)
+          
+          <div class="buttonbar">
+            <button class="button" onclick="myFunction(&quot;abs_jmp&quot;)">Abstract</button>
+          </div>
+            
+          <div class="popup" id="abs_jmp" style="display:none;">
+            <!--In a healthcare market characterized by agency problems stemming from misaligned incentives between insurers and physicians, vertical integration is increasingly seen as a strategy for aligning incentives between insurers and primary care physicians (PCPs). Using data from the Colorado All Payers’ Claims Data (CoAPCD), which includes medical encounters from 2015 to 2019, we analyze the effects of a 2017 insurer-PCP acquisition in Colorado, across both Medicare Advantage (MA) and Commercial segments. Our findings reveal that the acquisition led to a substantial increase in diagnosis coding by PCPs, resulting in an estimated 17% to 41% increase (or $883 to $2,064 per patient per year) in risk-adjusted payments from the government to the insurer in the MA segment. Furthermore, we note that the acquisition enables PCPs to internalize the costs of their referral decisions, leading to an increase in price sensitivity when referring patients to specialists, which translated to average savings of approximately $750 per referral. Our study shed light on how insurer-physician integration effectively aligns incentives, increasing MA revenues for the insurer while managing the cost of specialist care.-->
+          </div>
+
+        <hr><h2>Work in Progress</h2>
+
+        <p><b>Private Equity’s Impact on Primary Care and Medicare</b> (with <a href="[Link to Mari's Page]">Mariana Guido</a>)
+
+        <p><b>Do People Undervalue Mental Health Treatment? Evidence from Gambling Addiction Therapy</b>
+        (with Sarah Bogl, <a href="https://mattbrownecon.github.io/">Matthew Brown</a>, and <a href="[Link to Mari's Page]">Mariana Guido</a>)
+  
+        <!-- <hr><h2>Publications</h2>
+        <div class="text"> -->
+
+        <!--<hr><h2>Teaching</h2>
+        <div class="text"> 
+        <p> I have TAed for three undergraduate courses at Stanford: Principles of Economics, Behavioral Economics (three semesters), and Empirical Environmental Economics (two semesters). I received Stanford's Outstanding Teaching Assistant Award four times for my instruction in the latter two classes.</p>
+        
+        <p>Below, I provide for public use some teaching materials that I developed for those classes.</p>
+        </div>
+
+        <div class="buttonbar"><button class="button" onclick="myFunction(&quot;teaching_bpe&quot;)">Behavioral Public Economics</button></div>
+        <div class="popup" id="teaching_bpe" style="display:none;">
+            <div class="text">
+              <ul>
+                <li>Adapts content from <a class="XqQF9c" href="https://sites.google.com/view/behavioralpublic/home" target="_blank"><b>NBER Behavioral Public Economics PhD student boot camp</b></a> for undergraduate elective class</li>
+                <li>Public economics intuition presented via supply and demand diagrams (few equations)</li>
+                <li>Developed for four 100-minute class periods in ECON 178 at Stanford (undergraduate behavioral economics)</li>
+                <li>Lecture slides (PowerPoint)</li>
+                <ul>
+                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass1.pptx" target="_blank"> Class 1: Introduction and normative foundations</a></li>
+                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass2.pptx" target="_blank"> Class 2: Taxes</a></li>
+                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass3.pptx" target="_blank"> Class 3: Nudges</a></li>
+                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass4.pptx" target="_blank"> Class 4: Other topics</a></li>
+                </ul>
+              </ul>
+            </div>
+        </div>
+
+      <div style="height: 20px;"></div>
+      
+      <div class="buttonbar"><button class="button" onclick="myFunction(&quot;teaching_Rguide&quot;)">R for Applied Economics: A Beginner's Guide</button></div>
+      <div class="popup" id="teaching_Rguide" style="display:none;">
+        <div class="text">
+          <ul>
+              <li><a href="https://bookdown.org/mbrown35/bookdown-Rguide/" target="_blank"><b>Online introduction to R</b></a> for undergraduates taking economics classes</li>
+              <li>Walks students through process of setting up R, downloading and cleaning data, performing analyses, saving output</li>                
+              <li>Tailored to econ-specific tasks (e.g, regression tables and event study plots)</li>
+              <li>Developed for ECON 177 at Stanford (undergraduate environmental economics)</li>
+          </ul>
+          </div>
+      </div>
+    -->
+
+
+  </div>
+
+</body>
+</html>
