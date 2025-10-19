@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nick Grasley">
+
+<title>R Tutorial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="R Tutorial_files/libs/clipboard/clipboard.min.js"></script>
+<script src="R Tutorial_files/libs/quarto-html/quarto.js"></script>
+<script src="R Tutorial_files/libs/quarto-html/popper.min.js"></script>
+<script src="R Tutorial_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="R Tutorial_files/libs/quarto-html/anchor.min.js"></script>
+<link href="R Tutorial_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="R Tutorial_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="R Tutorial_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="R Tutorial_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="R Tutorial_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R Tutorial</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nick Grasley </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="learning-r-for-econ-102c" class="level1">
+<h1>Learning R for Econ 102C</h1>
+<p>R is a programming language built specifically for statistics and data science. While it has a steeper learning curve than Stata, it shares many features in common with other programming languages and can help you learn the basics of programming. R is well suited for completing any of the problem sets that you have this quarter.</p>
+<p>For this class (and for almost all applied economics problems), the basic workflow is to load in the data, clean it, and estimate your model’s parameters using your chosen estimator. Each section below walks you through this workflow. I have hopefully covered everything that you need to know even if you are total beginner to programming.</p>
+<section id="preliminaries" class="level2">
+<h2 class="anchored" data-anchor-id="preliminaries">Preliminaries</h2>
+<section id="installing-r-and-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="installing-r-and-rstudio">Installing R and RStudio</h3>
+<p>You can install R from <a href="https://posit.co/download/rstudio-desktop/" title="link to R installer">here</a>. I also recommend you use RStudio, which can be installed after installing R at the same link. However, you can use R with any IDE (integrated development environment), such as Visual Studio Code. I will be assuming that you are using R Studio for this tutorial If you have any troubles installing R, I’m more than happy to debug during office hours.</p>
+<p>Once you open RStudio, you can see that there are multiple panes. The top left will often be for writing code<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The bottom left is your console, which is where your code will run. The top right is your environment, which will contain all of your variables and data that you are working with. Finally, the bottom right frame contains useful things you might use while coding, such as navigating your files, seeing your plots, or getting help on a function.</p>
+</section>
+<section id="creating-a-script" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-script">Creating a Script</h3>
+<p>To start, I recommend using a script to code. If you click on the paper with the plus in the top left corner (or File &gt; New File &gt; R Script), you will open a new script. This is where you can write all of your code for a problem. When you hit the “source” button, it will run the script from start to finish. You can also execute chunks of code by highlighting them and hitting “Run.” I recommend having a single script for each problem.</p>
+<p>When you get more comfortable with R, you may prefer using a notebook or Quarto Document. These allow you to write some text and execute blocks of code rather than have a single long script. For example, this document was made as a Quarto Document.</p>
+</section>
+<section id="variables-and-types" class="level3">
+<h3 class="anchored" data-anchor-id="variables-and-types">Variables and Types</h3>
+<p>In R, you save values with a specific type to variables and then modify them with functions. Types define what is contained in the variable (e.g., integers, strings, lists, etc.). There are a lot of different types, and we will walk through some of the most important ones in this document.</p>
+<p>To save a value to a variable, you assign (<code>&lt;-</code>, an arrow pointing to the variable) a variable name a value:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fl">2.7</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>Here, you can see I assigned the variable <code>y</code> the value of <code>2.7</code> and its type is double.</p>
+<p>Functions are also a type which takes an input and returns an output:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Here the function <code>round()</code> has an input of <code>y</code> and outputs <code>y</code> rounded down to 2. This function does not change y itself but outputs a new value. However, some functions will modify the input itself, so make sure you know what it does. You can also save the output over the existing variable or create a new variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">round</span>(y)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">round</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To see what a function does, you can either look it up online, or RStudio has a help pane on the right side. Type the function into the search bar just below the help tab, and it will provide you with useful information about the function.</p>
+</section>
+<section id="installing-and-using-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installing-and-using-packages">Installing and Using Packages</h3>
+<p>Other people often write useful types and functions that will make your life easier. They share these in “packages,” which you can download to use their functions. To install packages,</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You only need to run this once and it will save the package on your computer. However, you need to load the package before you can use it, generally at the start of each script:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Please cite as: 
+
+ Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+ R package version 5.2.3. https://CRAN.R-project.org/package=stargazer </code></pre>
+</div>
+</div>
+<p>Tidyverse and stargazer are two packages that you will likely use a lot in this class. Tidyverse contains many useful functions for working with data, while stargazer helps print out regression results.</p>
+</section>
+<section id="comments" class="level3">
+<h3 class="anchored" data-anchor-id="comments">Comments</h3>
+<p>Comments help you (and me as a TA) follow the reasons why you code something in a particular way. You can type comments with <code>#</code> at the start of the line</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a comment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It’s often most useful to use comments in places where, reading the code, someone might have questions about what you are doing or why you are doing it. You can also use certain conventions to label sections:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Section Header Style ------------------------</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">#################</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">### Another Style</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">#################</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If your code is clear from the variables and functions you have written, no need to leave a comment!</p>
+</section>
+</section>
+<section id="loading-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data">Loading Data</h2>
+<p>Before we load data, it’s best to clear any previous data we may have had in a previous session:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rm stands for "remove."</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># list tells rm() that you want to remove a list of objects.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ls() is the list of all objects currently in your environment.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># It also removes packages, so let's re-load them.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You first need to navigate to the folder containing your data and load your required packages. R has a “working directory,” which is the current folder that it is executing your code in. To see your working directory,</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which stands for “get working directory.” You can also set the working directory to something else:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"path/to/folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now to load the data. Tidyverse, the package we loaded earlier, has the function <code>read_csv()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are in the directory, you can just list the file name. Otherwise, you have to list the full path or the path from the working directory to the file.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>marrprem_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MarrPrem_small.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2373 Columns: 33
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (16): statefip, nchild, sex, marst, race, raced, hispan, hispand, educ, ...
+dbl (17): serial, age, uhrswork, incwage, married, White, Black, Hispanic, A...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(marrprem_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
+</div>
+</div>
+<p>This will load the data in MarrPrem_small.csv and assign it to <code>data</code>. You can click on <code>data</code> in the Environment pane to open up the values in a separate tab, or type in the Console <code>View(data)</code>.</p>
+</section>
+<section id="cleaning-data" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-data">Cleaning Data</h2>
+<p>Cleaning data is often where the most mistakes creep in. It’s easy to misunderstand the structure of the data or misunderstand what your code is actually doing.</p>
+<section id="my-cleaning-recommendation-dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="my-cleaning-recommendation-dplyr">My Cleaning Recommendation: Dplyr</h3>
+<p>Dplyr is a intuitive way to clean data. It involves chaining steps together to clean a data frame. The basic format is</p>
+<pre><code>cleaned_data &lt;- raw_data |&gt;
+  cleaning_function(colname) |&gt;
+  cleaning_function2(colname2, colname3)</code></pre>
+<p>As we’ve seen, <code>cleaned_data</code> is the final output. <code>raw_data</code> is what you start with. The operator <code>|&gt;</code> means to send the output to the next function call as the first argument of the function. In this case, <code>raw_data</code> is sent to <code>cleaning_function()</code> which is then sent to <code>cleaning_function2()</code>. Often, the cleaning functions directly use the column name as input and implicitly knows how to work with the data frame. Here are some common commands you might use:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>() <span class="co"># adds new variables that are functions of existing variables</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_wage =</span> <span class="fu">log</span>(wage))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>() <span class="co"># keeps or drops variables based on their names</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(log_wage) keeps, <span class="fu">select</span>(<span class="sc">-</span>wage) drops</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>() <span class="co"># keeps observations based on specified conditions</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(log_wage <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>() <span class="co"># sort the data frame</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(log_wage)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>() <span class="co"># Join to another data frame. Also left, right, etc.</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(asset_df, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>() <span class="co"># groups observations for future mutations</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(educ_cat)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>() <span class="co"># collapse data to summary stats</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_wage =</span> <span class="fu">mean</span>(wage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here are some steps to make sure that data cleaning runs smoothly.</p>
+<section id="always-look-at-the-data-first-and-produce-simple-descriptives" class="level4">
+<h4 class="anchored" data-anchor-id="always-look-at-the-data-first-and-produce-simple-descriptives">Always look at the data first and produce simple descriptives</h4>
+<p>The data are often going to be different than you expect. Here’s some ways to examine the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(marrprem_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,373
+Columns: 33
+$ serial     &lt;dbl&gt; 3715910, 5993451, 5991943, 3948575, 116010, 6323033, 549875…
+$ statefip   &lt;chr&gt; "New Jersey", "Utah", "Utah", "New York", "Alaska", "Washin…
+$ nchild     &lt;chr&gt; "2", "0 children present", "0 children present", "0 childre…
+$ age        &lt;dbl&gt; 42, 48, 46, 46, 41, 48, 44, 43, 49, 43, 43, 48, 46, 45, 46,…
+$ sex        &lt;chr&gt; "Female", "Female", "Male", "Male", "Male", "Female", "Male…
+$ marst      &lt;chr&gt; "Married, spouse present", "Never married/single", "Divorce…
+$ race       &lt;chr&gt; "White", "Other Asian or Pacific Islander", "White", "Black…
+$ raced      &lt;chr&gt; "White", "Vietnamese", "White", "Black/Negro", "White", "Wh…
+$ hispan     &lt;chr&gt; "Not Hispanic", "Not Hispanic", "Mexican", "Not Hispanic", …
+$ hispand    &lt;chr&gt; "Not Hispanic", "Not Hispanic", "Mexican", "Not Hispanic", …
+$ educ       &lt;chr&gt; "Grade 12", "Grade 12", "Grade 12", "4 years of college", "…
+$ educd      &lt;chr&gt; "Regular high school diploma", "Regular high school diploma…
+$ empstat    &lt;chr&gt; "Not in labor force", "Not in labor force", "Employed", "Em…
+$ empstatd   &lt;chr&gt; "Not in Labor Force", "Not in Labor Force", "At work", "At …
+$ uhrswork   &lt;dbl&gt; 0, 0, 40, 40, 40, 50, 40, 40, 40, 40, 40, 32, 60, 0, 0, 0, …
+$ incwage    &lt;dbl&gt; 0, 0, 31396, 91476, 3368, 47973, 52665, 24139, 82329, 9200,…
+$ MARST_MOM  &lt;chr&gt; NA, NA, "Married, spouse present", NA, NA, NA, NA, NA, NA, …
+$ MARST_POP  &lt;chr&gt; NA, "Widowed", "Married, spouse present", NA, NA, NA, NA, N…
+$ married    &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1,…
+$ race_cat   &lt;chr&gt; "White", "Asian", "Hispanic", "Black", "White", "White", "H…
+$ White      &lt;dbl&gt; 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,…
+$ Black      &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ Hispanic   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,…
+$ Asian      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…
+$ Other      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ educ_cat   &lt;chr&gt; "HS diploma/some college", "HS diploma/some college", "HS d…
+$ lessHS     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,…
+$ HS         &lt;dbl&gt; 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1,…
+$ Coll       &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0,…
+$ NoWork2012 &lt;dbl&gt; 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0,…
+$ NoWork2011 &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1,…
+$ uhrsday    &lt;dbl&gt; 0.0, 0.0, 8.0, 8.0, 8.0, 10.0, 8.0, 8.0, 8.0, 8.0, 8.0, 6.4…
+$ parent     &lt;dbl&gt; 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1,…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(marrprem_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     serial          statefip            nchild               age       
+ Min.   :   7796   Length:2373        Length:2373        Min.   :40.00  
+ 1st Qu.:1660301   Class :character   Class :character   1st Qu.:43.00  
+ Median :3278434   Mode  :character   Mode  :character   Median :45.00  
+ Mean   :3277599                                         Mean   :45.23  
+ 3rd Qu.:4929442                                         3rd Qu.:48.00  
+ Max.   :6544300                                         Max.   :50.00  
+     sex               marst               race              raced          
+ Length:2373        Length:2373        Length:2373        Length:2373       
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+    hispan            hispand              educ              educd          
+ Length:2373        Length:2373        Length:2373        Length:2373       
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+   empstat            empstatd            uhrswork        incwage      
+ Length:2373        Length:2373        Min.   : 0.00   Min.   :     0  
+ Class :character   Class :character   1st Qu.:25.00   1st Qu.:  2552  
+ Mode  :character   Mode  :character   Median :40.00   Median : 28764  
+                                       Mean   :33.42   Mean   : 40697  
+                                       3rd Qu.:40.00   3rd Qu.: 55705  
+                                       Max.   :99.00   Max.   :651514  
+  MARST_MOM          MARST_POP            married         race_cat        
+ Length:2373        Length:2373        Min.   :0.0000   Length:2373       
+ Class :character   Class :character   1st Qu.:0.0000   Class :character  
+ Mode  :character   Mode  :character   Median :1.0000   Mode  :character  
+                                       Mean   :0.6258                     
+                                       3rd Qu.:1.0000                     
+                                       Max.   :1.0000                     
+     White           Black           Hispanic           Asian        
+ Min.   :0.000   Min.   :0.0000   Min.   :0.00000   Min.   :0.00000  
+ 1st Qu.:1.000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.00000  
+ Median :1.000   Median :0.0000   Median :0.00000   Median :0.00000  
+ Mean   :0.767   Mean   :0.1091   Mean   :0.01054   Mean   :0.01475  
+ 3rd Qu.:1.000   3rd Qu.:0.0000   3rd Qu.:0.00000   3rd Qu.:0.00000  
+ Max.   :1.000   Max.   :1.0000   Max.   :1.00000   Max.   :1.00000  
+     Other            educ_cat             lessHS             HS        
+ Min.   :0.000000   Length:2373        Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.000000   Class :character   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.000000   Mode  :character   Median :0.0000   Median :1.0000  
+ Mean   :0.003371                      Mean   :0.1087   Mean   :0.6001  
+ 3rd Qu.:0.000000                      3rd Qu.:0.0000   3rd Qu.:1.0000  
+ Max.   :1.000000                      Max.   :1.0000   Max.   :1.0000  
+      Coll          NoWork2012       NoWork2011        uhrsday      
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   : 0.000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.: 5.000  
+ Median :0.0000   Median :0.0000   Median :0.0000   Median : 8.000  
+ Mean   :0.2912   Mean   :0.2326   Mean   :0.2284   Mean   : 6.685  
+ 3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:0.0000   3rd Qu.: 8.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :19.800  
+     parent     
+ Min.   :0.000  
+ 1st Qu.:0.000  
+ Median :1.000  
+ Mean   :0.582  
+ 3rd Qu.:1.000  
+ Max.   :1.000  </code></pre>
+</div>
+</div>
+<p>Let’s check out frequencies for one of the character variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The dollar sign lets you pick out specific columns from a data frame</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(marrprem_df<span class="sc">$</span>race)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+American Indian or Alaska Native                      Black/Negro 
+                              25                              259 
+                         Chinese                         Japanese 
+                              35                                8 
+ Other Asian or Pacific Islander                  Other race, nec 
+                              75                               99 
+       Three or more major races                  Two major races 
+                               6                               46 
+                           White 
+                            1820 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you want percentages rather than frequencies</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(marrprem_df<span class="sc">$</span>race))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+American Indian or Alaska Native                      Black/Negro 
+                     0.010535188                      0.109144543 
+                         Chinese                         Japanese 
+                     0.014749263                      0.003371260 
+ Other Asian or Pacific Islander                  Other race, nec 
+                     0.031605563                      0.041719343 
+       Three or more major races                  Two major races 
+                     0.002528445                      0.019384745 
+                           White 
+                     0.766961652 </code></pre>
+</div>
+</div>
+<p>It matches up with the race dummy variables. If you want to visualize continuous variables,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(marrprem_df<span class="sc">$</span>incwage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="R-Tutorial_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="write-out-the-cleaning-steps-in-comments-first-and-then-the-code" class="level4">
+<h4 class="anchored" data-anchor-id="write-out-the-cleaning-steps-in-comments-first-and-then-the-code">Write out the cleaning steps in comments first and then the code</h4>
+<p>This will help you think through what you want to do before you implement the code. It helps you not waste time coding something that you end up not needing in the end.</p>
+</section>
+<section id="while-cleaning-check-often-that-your-codes-output-is-what-you-expect" class="level4">
+<h4 class="anchored" data-anchor-id="while-cleaning-check-often-that-your-codes-output-is-what-you-expect">While cleaning, check often that your code’s output is what you expect</h4>
+<p>Using a simple wrong example, suppose that we want the hourly wage. Maybe you do</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>marrprem_cleaned <span class="ot">&lt;-</span> marrprem_df <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wage_hourly =</span> incwage <span class="sc">/</span> uhrswork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You would think that most hourly wages should be between 0 and 100. Let’s check:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(marrprem_cleaned<span class="sc">$</span>wage_hourly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+    0.0   485.5   894.2  1188.5  1519.8 17724.0     431 </code></pre>
+</div>
+</div>
+<p>Clearly wrong! <code>uhrswork</code> is actually hours worked per week. We can instead approximate the hourly wage using</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>marrprem_cleaned <span class="ot">&lt;-</span> marrprem_df <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wage_hourly =</span> incwage <span class="sc">/</span> (<span class="dv">52</span> <span class="sc">*</span> uhrswork))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(marrprem_cleaned<span class="sc">$</span>wage_hourly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  0.000   9.338  17.197  22.857  29.227 340.846     431 </code></pre>
+</div>
+</div>
+<p>Much better. You can also see that there are some missings. These are people who had zero hours worked. We may want to check that they have zero income wage:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the max wage of those with zero work hours should also be zero.</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>marrprem_df <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(uhrswork <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(incwage) <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">incwage_max =</span> <span class="fu">max</span>(incwage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  incwage_max
+        &lt;dbl&gt;
+1           0</code></pre>
+</div>
+</div>
+<p>So those people have zero income as we expect. Let’s set their hourly wage to zero:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>marrprem_cleaned <span class="ot">&lt;-</span> marrprem_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wage_hourly =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(wage_hourly), <span class="dv">0</span>, wage_hourly))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(marrprem_cleaned<span class="sc">$</span>wage_hourly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   1.923  13.740  18.705  25.320 340.846 </code></pre>
+</div>
+</div>
+</section>
+<section id="always-look-at-the-final-output-and-produce-descriptives" class="level4">
+<h4 class="anchored" data-anchor-id="always-look-at-the-final-output-and-produce-descriptives">Always look at the final output and produce descriptives</h4>
+<p>We can create a nice summary statistics table with Stargazer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>summ_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"wage_hourly"</span>, <span class="st">"age"</span>, <span class="st">"married"</span>, <span class="st">"White"</span>, <span class="st">"Black"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use df[i,j] to select row i and column(s) j of a data frame</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># as.data.frame() converts our data to an explicit data.frame, which is needed for stargazer</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(<span class="fu">as.data.frame</span>(marrprem_cleaned[,summ_cols]), <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===============================================
+Statistic     N    Mean  St. Dev.  Min    Max  
+-----------------------------------------------
+wage_hourly 2,373 18.705  24.801  0.000 340.846
+age         2,373 45.231  3.187    40     50   
+married     2,373 0.626   0.484     0      1   
+White       2,373 0.767   0.423     0      1   
+Black       2,373 0.109   0.312     0      1   
+-----------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="estimation" class="level2">
+<h2 class="anchored" data-anchor-id="estimation">Estimation</h2>
+<p>There are many packages that implement the econometrics that we will talk about this quarter. They often involve a formula (roughly your model) and the data, with some other options. Let’s implement OLS:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ~ is the "equals" sign of a formula. We are regression hourly wage on demographics</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>simple_ols_form <span class="ot">&lt;-</span> wage_hourly <span class="sc">~</span> age <span class="sc">+</span> White <span class="sc">+</span> Black <span class="sc">+</span> married</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>simple_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(simple_ols_form, marrprem_cleaned)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_ols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = simple_ols_form, data = marrprem_cleaned)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-23.27 -14.20  -4.97   6.81 317.57 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  23.9631     7.2586   3.301 0.000977 ***
+age          -0.2503     0.1582  -1.582 0.113740    
+White         2.6241     1.5432   1.700 0.089190 .  
+Black        -1.2958     2.1131  -0.613 0.539795    
+married       6.6962     1.0635   6.296 3.62e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 24.53 on 2368 degrees of freedom
+Multiple R-squared:  0.02363,   Adjusted R-squared:  0.02198 
+F-statistic: 14.33 on 4 and 2368 DF,  p-value: 1.469e-11</code></pre>
+</div>
+</div>
+<p><code>lm()</code> estimates the model and <code>summary()</code> shows the typical regression output you saw from Econ 102B. We can estimate more models:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor() turns a character variable into a dummies.</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>factor_form <span class="ot">&lt;-</span> wage_hourly <span class="sc">~</span> age <span class="sc">+</span> White <span class="sc">+</span> Black <span class="sc">+</span> married <span class="sc">+</span> <span class="fu">factor</span>(sex)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>factor_ols <span class="ot">&lt;-</span> <span class="fu">lm</span>(factor_form, marrprem_cleaned)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(factor_ols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = factor_form, data = marrprem_cleaned)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-27.803 -13.761  -4.732   6.598 313.043 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      16.9284     7.1663   2.362   0.0182 *  
+age              -0.1955     0.1554  -1.258   0.2086    
+White             2.4018     1.5155   1.585   0.1131    
+Black            -0.7607     2.0757  -0.366   0.7140    
+married           6.9404     1.0446   6.644 3.77e-11 ***
+factor(sex)Male   9.3522     0.9914   9.433  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 24.08 on 2367 degrees of freedom
+Multiple R-squared:  0.059, Adjusted R-squared:  0.05702 
+F-statistic: 29.68 on 5 and 2367 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>We can combine outputs into one table with stargazer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(simple_ols, factor_ols, <span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=====================================================================
+                                   Dependent variable:               
+                    -------------------------------------------------
+                                       wage_hourly                   
+                              (1)                      (2)           
+---------------------------------------------------------------------
+age                          -0.250                   -0.195         
+                            (0.158)                  (0.155)         
+                                                                     
+White                        2.624*                   2.402          
+                            (1.543)                  (1.516)         
+                                                                     
+Black                        -1.296                   -0.761         
+                            (2.113)                  (2.076)         
+                                                                     
+married                     6.696***                 6.940***        
+                            (1.063)                  (1.045)         
+                                                                     
+factor(sex)Male                                      9.352***        
+                                                     (0.991)         
+                                                                     
+Constant                   23.963***                 16.928**        
+                            (7.259)                  (7.166)         
+                                                                     
+---------------------------------------------------------------------
+Observations                 2,373                    2,373          
+R2                           0.024                    0.059          
+Adjusted R2                  0.022                    0.057          
+Residual Std. Error    24.527 (df = 2368)       24.083 (df = 2367)   
+F Statistic         14.326*** (df = 4; 2368) 29.684*** (df = 5; 2367)
+=====================================================================
+Note:                                     *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<p>Finally, we can choose to save it by filling in a file path to the <code>out</code> option:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(simple_ols, factor_ols, <span class="at">type =</span> <span class="st">"latex"</span>, <span class="at">out =</span> <span class="st">"ols_table.tex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Sat, Oct 18, 2025 - 22:06:26
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ &amp; \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] &amp; \multicolumn{2}{c}{wage\_hourly} \\ 
+\\[-1.8ex] &amp; (1) &amp; (2)\\ 
+\hline \\[-1.8ex] 
+ age &amp; $-$0.250 &amp; $-$0.195 \\ 
+  &amp; (0.158) &amp; (0.155) \\ 
+  &amp; &amp; \\ 
+ White &amp; 2.624$^{*}$ &amp; 2.402 \\ 
+  &amp; (1.543) &amp; (1.516) \\ 
+  &amp; &amp; \\ 
+ Black &amp; $-$1.296 &amp; $-$0.761 \\ 
+  &amp; (2.113) &amp; (2.076) \\ 
+  &amp; &amp; \\ 
+ married &amp; 6.696$^{***}$ &amp; 6.940$^{***}$ \\ 
+  &amp; (1.063) &amp; (1.045) \\ 
+  &amp; &amp; \\ 
+ factor(sex)Male &amp;  &amp; 9.352$^{***}$ \\ 
+  &amp;  &amp; (0.991) \\ 
+  &amp; &amp; \\ 
+ Constant &amp; 23.963$^{***}$ &amp; 16.928$^{**}$ \\ 
+  &amp; (7.259) &amp; (7.166) \\ 
+  &amp; &amp; \\ 
+\hline \\[-1.8ex] 
+Observations &amp; 2,373 &amp; 2,373 \\ 
+R$^{2}$ &amp; 0.024 &amp; 0.059 \\ 
+Adjusted R$^{2}$ &amp; 0.022 &amp; 0.057 \\ 
+Residual Std. Error &amp; 24.527 (df = 2368) &amp; 24.083 (df = 2367) \\ 
+F Statistic &amp; 14.326$^{***}$ (df = 4; 2368) &amp; 29.684$^{***}$ (df = 5; 2367) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  &amp; \multicolumn{2}{r}{$^{*}$p$&lt;$0.1; $^{**}$p$&lt;$0.05; $^{***}$p$&lt;$0.01} \\ 
+\end{tabular} 
+\end{table} </code></pre>
+</div>
+</div>
+<p>If you want some more details on Stargazer, you can look <a href="https://www.princeton.edu/~otorres/NiceOutputR.pdf">here.</a></p>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
+<p>You won’t have to do too many plots for this class, but ggplot is the commonly chosen method for plotting. It involves telling ggplot how your data maps into plot features and then specifying “geometries,” or the objects on your plot. For example, to create a scatter plot, you do</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(marrprem_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> wage_hourly)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="R-Tutorial_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If you want more information on ggplot and its functionality, see <a href="https://ggplot2.tidyverse.org">here</a>.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>That’s the basics! This should give you the foundation you need to complete the problem sets in this course. You will have to look up more packages as we learn new econometric techniques. I recommend looking first at <a href="https://www.econometrics-with-r.org">this site</a> for the packages they use for the topics we cover.</p>
+<p>If you have any questions while doing the problem sets, don’t hesitate to drop by office hours!</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>You may not see it yet if you haven’t opened an R script.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>There are other functions for loading other types of data if you need to.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

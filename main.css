@@ -51,6 +51,12 @@ div.buttonbar{
 color:#565656;
 }
 
+.buttonbar-inline {
+  display: inline-block;   /* keeps button on the same line */
+  margin-left: 10px;       /* optional spacing */
+}
+
+
 .button {
 	background-color: #f2f2f2;
 	border: none;

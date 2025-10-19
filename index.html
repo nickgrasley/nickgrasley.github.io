@@ -26,8 +26,8 @@
       
         var ids = [
           "abs_jmp", "surveys_jmp", 
-          "abs_sports", "abs_overlap",
-          "teaching_bpe", "teaching_Rguide"];
+          "abs_sports", "abs_vi", "abs_therapy",
+          "teaching_econ101", "TA", "teaching_Rguide"];
       
         for(var i = 0; i < ids.length; i++) {
           var item = ids[i];
@@ -158,62 +158,75 @@
           </div>
 
         <hr><h2>Work in Progress</h2>
-
-        <p><b>Private Equity’s Impact on Primary Care and Medicare</b> (with <a href="https://marianaguido.github.io/">Mariana Guido</a>)
-
+        
         <p><b>Misperceptions, Willpower, and the Demand for Talk Therapy</b>
         (with <a href="mailto:nmahoney@stanford.edu">Sarah Bogl</a>, <a href="https://mattbrownecon.github.io/">Matthew Brown</a>, and <a href="https://marianaguido.github.io/">Mariana Guido</a>)
 
           <div class="buttonbar">
-            <button class="button" onclick="myFunction(&quot;abs_jmp&quot;)">Abstract</button>
+            <button class="button" onclick="myFunction(&quot;abs_therapy&quot;)">Abstract</button>
           </div>
             
-          <div class="popup" id="abs_jmp" style="display:none;">
+          <div class="popup" id="abs_therapy" style="display:none;">
             Many people with mental health problems do not seek treatment despite evidence that therapy can improve well-being. Working with a provider of gambling addiction therapy, we conduct a field experiment to measure how behavioral biases impact therapy demand and what interventions may overcome them. We consider two behavioral biases: misperceptions and willpower problems. To study misperceptions, we measure how participants’ perceptions of therapy change after attending a session. To study willpower issues, we measure participants’ willingness to pay for a commitment device to attend therapy. Lastly, we evaluate the effectiveness of two scalable interventions--financial incentives and text message encouragements--at increasing therapy takeup.
             </div>
+            
+        <p><b>Private Equity’s Impact on Primary Care and Medicare</b> (with <a href="https://marianaguido.github.io/">Mariana Guido</a>)
+
+
   
         <!-- <hr><h2>Publications</h2>
         <div class="text"> -->
 
-        <!--<hr><h2>Teaching</h2>
-        <div class="text"> 
-        <p> I have TAed for three undergraduate courses at Stanford: Principles of Economics, Behavioral Economics (three semesters), and Empirical Environmental Economics (two semesters). I received Stanford's Outstanding Teaching Assistant Award four times for my instruction in the latter two classes.</p>
+        <hr><h2>Teaching</h2>
         
-        <p>Below, I provide for public use some teaching materials that I developed for those classes.</p>
-        </div>
+  <p><b>Primary Instructor, Spring 2025</b><br>
+  Economic Policy Seminar: Social Insurance and Aging in the US</p>
 
-        <div class="buttonbar"><button class="button" onclick="myFunction(&quot;teaching_bpe&quot;)">Behavioral Public Economics</button></div>
-        <div class="popup" id="teaching_bpe" style="display:none;">
+  <div class="text">
+    
+    <ul>
+      <li>Designed base syllabus for all Stanford Economics Department capstone courses</li>
+      <li>Taught one quarter of this capstone course on social insurance policy in the US</li>
+    </ul>
+    
+  </div>
+
+        <div class="buttonbar">
+          <button class="button" onclick="myFunction(&quot;teaching_econ101&quot;)">Class Content</button>
+        </div>
+        <div class="popup" id="teaching_econ101" style="display:none;">
             <div class="text">
               <ul>
-                <li>Adapts content from <a class="XqQF9c" href="https://sites.google.com/view/behavioralpublic/home" target="_blank"><b>NBER Behavioral Public Economics PhD student boot camp</b></a> for undergraduate elective class</li>
-                <li>Public economics intuition presented via supply and demand diagrams (few equations)</li>
-                <li>Developed for four 100-minute class periods in ECON 178 at Stanford (undergraduate behavioral economics)</li>
-                <li>Lecture slides (PowerPoint)</li>
-                <ul>
-                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass1.pptx" target="_blank"> Class 1: Introduction and normative foundations</a></li>
-                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass2.pptx" target="_blank"> Class 2: Taxes</a></li>
-                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass3.pptx" target="_blank"> Class 3: Nudges</a></li>
-                  <li><a href="https://mattbrownecon.github.io/assets/teaching/bpubec/BPubEcClass4.pptx" target="_blank"> Class 4: Other topics</a></li>
-                </ul>
+                <li>Primary learning goal to research and write a policy memo on a social insurance policy in the US</li>
+                <li>Students work in teams to create research question, review literature, analyze data, and write on policy recommendation</li>
+                <li><a href="https://nickgrasley.github.io/assets/teaching/econ101/syllabus.pdf" target="_blank">Syllabus</a></li>
+                <li><a href="https://nickgrasley.github.io/assets/teaching/econ101/slides.pdf" target="_blank">Class Slides Example</a></li>
+                <li><a href="https://nickgrasley.github.io/assets/teaching/econ101/example.pdf" target="_blank">Policy Memo Example</a></li>
               </ul>
             </div>
         </div>
+        
+<p>
+  <b>Teaching Assistant</b>
+  <span class="buttonbar-inline">
+    <button class="button" onclick="myFunction('TA')">Classes</button>
+  </span>
+</p>
 
+<div class="popup" id="TA" style="display:none;">
+  <div class="text">
+    <ul>
+      <li>Introduction to Financial Decision Making (Econ 43, 3 quarters)</li>
+      <li>Advanced Topics in Econometrics (Econ 102C, 1 quarter)</li>
+      <li>Economic Policy Seminar (Econ 101, 2 quarters)</li>
+    </ul>
+  </div>
+</div>
+
+  
       <div style="height: 20px;"></div>
       
-      <div class="buttonbar"><button class="button" onclick="myFunction(&quot;teaching_Rguide&quot;)">R for Applied Economics: A Beginner's Guide</button></div>
-      <div class="popup" id="teaching_Rguide" style="display:none;">
-        <div class="text">
-          <ul>
-              <li><a href="https://bookdown.org/mbrown35/bookdown-Rguide/" target="_blank"><b>Online introduction to R</b></a> for undergraduates taking economics classes</li>
-              <li>Walks students through process of setting up R, downloading and cleaning data, performing analyses, saving output</li>                
-              <li>Tailored to econ-specific tasks (e.g, regression tables and event study plots)</li>
-              <li>Developed for ECON 177 at Stanford (undergraduate environmental economics)</li>
-          </ul>
-          </div>
-      </div>
-    -->
+      <div class="buttonbar"><a href="https://nickgrasley.github.io/assets/teaching/r_tutorial" class="button">R Tutorial for Applied Econ Class</a></div>
 
 
   </div>
