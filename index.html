@@ -26,7 +26,8 @@
       
         var ids = [
           "abs_jmp", "surveys_jmp", 
-          "abs_sports", "abs_vi", "abs_therapy",
+          "abs_sports", "abs_vi",
+          "abs_therapy", "abs_pe",
           "teaching_econ101", "TA", "teaching_Rguide"];
       
         for(var i = 0; i < ids.length; i++) {
@@ -171,7 +172,14 @@
             </div>
             
         <p><b>Private Equity’s Impact on Primary Care and Medicare</b> (with <a href="https://marianaguido.github.io/">Mariana Guido</a>)
+        
+        <div class="buttonbar">
+          <button class="button" onclick="myFunction(&quot;abs_pe&quot;)">Abstract</button>
+        </div>
 
+        <div class="popup" id="abs_pe" style="display:none;">
+          Private equity (PE) investment in the U.S. healthcare sector has grown exponentially, raising concerns about its impact on the cost and quality of care. This paper investigates how PE acquisitions alter the behavior of primary care practices (PCPs) and, crucially, explores heterogeneity based on the acquirer's structure. We distinguish between acquisitions by pure financial sponsors and those by PE-insurer joint ventures, which may face conflicting incentives between profit maximization and managing population health costs. We construct a novel national dataset by linking PitchBook data on PE acquisitions from 2006 to 2018 with Medicare fee-for-service claims. Then, we employ a staggered difference-in-differences strategy to compare acquired PCPs to not-yet-acquired PCPs. Using state All-Payer Claims Data (APCD), we will further test for differential effects among Traditional Medicare and Medicare Advantage patients, where insurer-backed owners have stronger incentives to control utilization.
+        </div>
 
   
         <!-- <hr><h2>Publications</h2>
