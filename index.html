@@ -20,30 +20,16 @@
     </script>
 
     <!-- Add JavaScript for popup functionality -->
-    <script>
-      function myFunction(id) {
-        var x = document.getElementById(id);
-      
-        var ids = [
-          "abs_jmp", "surveys_jmp", 
-          "abs_sports", "abs_vi",
-          "abs_therapy", "abs_pe",
-          "teaching_econ101", "TA", "teaching_Rguide"];
-      
-        for(var i = 0; i < ids.length; i++) {
-          var item = ids[i];
-          if (item != id) {
-            document.getElementById(item).style.display = "none";
-          } else {
-            if (x.style.display === "none") {
-              x.style.display = "block";
-            } else {
-              x.style.display = "none";
-            }
-          }
-        }        
-      }
-    </script>
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none" || x.style.display === "") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
     <style>
       #contact {
           margin-bottom: 2rem;
